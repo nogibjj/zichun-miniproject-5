@@ -1,4 +1,3 @@
-# main.py
 import sqlite3
 
 def create_connection(db_file):
@@ -7,7 +6,7 @@ def create_connection(db_file):
     return conn
 
 def create_table(conn):
-    """Create a table."""
+    """Create the users table if it doesn't exist."""
     with conn:
         conn.execute('''CREATE TABLE IF NOT EXISTS users (
                             id INTEGER PRIMARY KEY,
@@ -15,28 +14,51 @@ def create_table(conn):
                             age INTEGER);''')
 
 def insert_user(conn, name, age):
-    """Insert a new user into the table."""
+    """Insert a new user into the users table."""
     with conn:
         conn.execute('INSERT INTO users (name, age) VALUES (?, ?)', (name, age))
 
+def update_user(conn, user_id, name, age):
+    """Update a user's name and age by their ID."""
+    with conn:
+        conn.execute('UPDATE users SET name = ?, age = ? WHERE id = ?', (name, age, user_id))
+
+def delete_user(conn, user_id):
+    """Delete a user by their ID."""
+    with conn:
+        conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+
 def fetch_users(conn):
-    """Fetch all users."""
+    """Fetch and return all users."""
     cur = conn.cursor()
     cur.execute('SELECT * FROM users')
     return cur.fetchall()
 
 if __name__ == '__main__':
-    # Create or connect to a persistent database file
+    # Connect to database
     database = "week5_project.db"
     conn = create_connection(database)
     
-    # Perform the necessary CRUD operations
+    # Create table
     create_table(conn)
+    
+    # Insert users
     insert_user(conn, 'Alice', 30)
     insert_user(conn, 'Bob', 25)
-
-    # Fetch and print users
-    users = fetch_users(conn)
-    print("Users:", users)
+    
+    # Read users (before update)
+    print("Users (before update):", fetch_users(conn))
+    
+    # Update user
+    update_user(conn, 1, 'Alice Smith', 31)
+    
+    # Read users (after update)
+    print("Users (after update):", fetch_users(conn))
+    
+    # Delete user
+    delete_user(conn, 2)
+    
+    # Read users (after delete)
+    print("Users (after delete):", fetch_users(conn))
     
     conn.close()
