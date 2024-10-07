@@ -52,6 +52,6 @@ jobs:
         with:
           name: db-file
 
-      - name: Test stage: Run unit tests using the .db file
+      - name: Run unit tests using the .db file
         run: |
           python3 -m unittest test_main.py  # Run the unit tests using the .db file
