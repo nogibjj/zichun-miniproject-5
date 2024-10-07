@@ -1,69 +1,38 @@
 
-# Zichun Mini Project 1
+# Week 5 Mini Project: SQL Database and CRUD Operations
 
-This is a Python project template with a functioning `Makefile`, a `.devcontainer`, and basic setup for CI/CD using GitHub Actions. The project also includes unit tests and linting with `pylint`.
+This project demonstrates how to connect to an SQLite database, perform CRUD operations, and automate the testing process using GitLab CI/CD.
 
-## Links
+## Project Overview
 
-- **Version control Source Code Management Repository**: [github repo](https://github.com/nogibjj/zichun-miniproject-1).
-- **Link to successful CI/CD run**: [Link to GitHub Actions](https://github.com/nogibjj/zichun-miniproject-1/actions).
+This project connects to a SQLite database, performs CRUD (Create, Read, Update, Delete) operations, and demonstrates the use of SQL queries. The project is set up to run in a Continuous Integration/Continuous Deployment (CI/CD) pipeline where the `.db` file is loaded and tested.
 
+## Deliverables
 
-## Project Setup
+- Python script (`main.py`) for CRUD operations
+- Test script (`test_main.py`) for unit testing
+- `.gitlab-ci.yml` for CI/CD pipeline
+- **Screenshot or of successful database operations:**
 
-### 1. Clone the Repository
+![CRUD Operations Log](screenshot_log.png)
 
-```bash
-git clone https://github.com/your-username/zichun-miniproject-1.git
-cd zichun-miniproject-1
-```
+## Setup
 
-### 2. Install Dependencies
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/YOUR_REPO_NAME.git
+   ```
 
-You can install the required Python dependencies by running:
+2. Run the Python script:
+   ```bash
+   python3 main.py
+   ```
 
-```bash
-make setup
-```
-
-This will install all the packages listed in `requirements.txt`.
-
-### 3. Running the Linter
-
-To ensure your code follows proper Python style guidelines, run:
-
-```bash
-make lint
-```
-
-This will run `pylint` on the `src/main.py` file.
-
-### 4. Running Tests
-
-To run the unit tests using `pytest`, use the following command:
-
-```bash
-make test
-```
-
-The `Makefile` is set up to run the tests in the `tests/` directory.
-
-## Usage Instructions
-
-The project contains a simple `add` function and a main script. You can run the main script as follows:
-
-```bash
-python src/main.py
-```
-
-The `main.py` file will print "Hello, world!" when executed.
+3. Check the `.db` file is created and populated by running:
+   ```bash
+   sqlite3 week5_project.db
+   ```
 
 ## CI/CD Pipeline
 
-This project uses GitHub Actions for Continuous Integration (CI). The workflow is defined in the `.github/workflows/ci.yml` file and runs automatically on every push to the main branch. The CI performs the following actions:
-- Linting with `pylint`
-- Running unit tests with `pytest`
-
-## Development Environment with Devcontainer
-
-A development container is included to ensure consistency in development environments. The `.devcontainer` folder contains a `Dockerfile` and `devcontainer.json` file for setting up the containerized development environment in tools like Visual Studio Code.
+The GitLab pipeline will automatically run the Python script and log the output for testing the database operations.

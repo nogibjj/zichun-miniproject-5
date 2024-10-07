@@ -1,36 +1,18 @@
-name: Python CI
+stages:
+  - build
+  - test
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+build_script:
+  stage: build
+  script:
+    - python3 main.py  # Run main.py to generate the .db file
+    - ls -la  # List files to verify the .db file is created
+    - cat week5_project.db  # Ensure the .db file exists and is usable
+  artifacts:
+    paths:
+      - week5_project.db  # Store the database file as an artifact to use in the test stage
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Lint with pylint
-        run: |
-          pylint src/main.py
-
-      - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src  # Set PYTHONPATH to include src
-        run: |
-          pytest tests
-
+test_script:
+  stage: test
+  script:
+    - python3 -m unittest test_main.py  # Run the unit tests using the .db file
