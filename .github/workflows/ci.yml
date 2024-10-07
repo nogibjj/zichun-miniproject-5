@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Build stage: Run main.py and generate .db file
+      - name: Run main.py and generate .db file
         run: |
           python3 main.py  # Run main.py to generate the .db file
           ls -la  # List files to verify the .db file is created
