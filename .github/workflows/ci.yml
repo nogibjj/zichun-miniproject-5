@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and run main.py
         run: |
-          python3 main.py  # Run main.py to generate the .db file
+          python3 src/main.py  # Run main.py to generate the .db file
           ls -la  # List files to verify the .db file is created
           cat week5_project.db  # Ensure the .db file exists and is usable
 
@@ -53,4 +53,4 @@ jobs:
 
       - name: Run unit tests using the .db file
         run: |
-          python3 -m unittest test_main.py  # Run the unit tests using the .db file
+          python3 -m unittest tests/test_main.py  # Run the unit tests using the .db file
