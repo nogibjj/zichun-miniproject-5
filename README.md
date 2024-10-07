@@ -9,23 +9,38 @@ This project connects to a SQLite database, performs CRUD (Create, Read, Update,
 
 ## Deliverables
 
-- Python script (`main.py`) for CRUD operations
-- Test script (`test_main.py`) for unit testing
+- Python script (`src/main.py`) for CRUD operations
+- Test script (`tests/test_main.py`) for unit testing
 - `.gitlab-ci.yml` for CI/CD pipeline
-- **Screenshot or of successful database operations:**
+- **Screenshot of successful CRUD operations:**
 
-![CRUD Operations Log](screenshot_log.png)
+![CRUD Operations Output](crud.png)
+
+## CRUD Operations Explanation
+
+The following operations were performed on the `users` table:
+
+1. **Create**: Inserted two users (`Alice` and `Bob`).
+2. **Read**: Retrieved and displayed the users from the database.
+   - Output: `[(1, 'Alice', 30), (2, 'Bob', 25)]`
+3. **Update**: Updated `Alice` to `Alice Smith` and changed her age to 31.
+   - Output after update: `[(1, 'Alice Smith', 31), (2, 'Bob', 25)]`
+4. **Delete**: Deleted `Bob` from the table.
+   - Output after deletion: `[(1, 'Alice Smith', 31)]`
+
+The operations were successful as shown in the screenshot above. The database was correctly updated at each step.
+
 
 ## Setup
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/YOUR_REPO_NAME.git
+   git clone https://github.com/nogibjj/zichun-miniproject-5.git
    ```
 
 2. Run the Python script:
    ```bash
-   python3 main.py
+   python3 src/main.py
    ```
 
 3. Check the `.db` file is created and populated by running:
