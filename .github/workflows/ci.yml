@@ -21,14 +21,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Build stage: Run main.py and generate .db file
+      - name: Build and run main.py
         run: |
           python3 main.py  # Run main.py to generate the .db file
           ls -la  # List files to verify the .db file is created
           cat week5_project.db  # Ensure the .db file exists and is usable
 
       - name: Upload database as artifact
-        uses: actions/upload-artifact@v3  # Updated to v3
+        uses: actions/upload-artifact@v3  # Use version 3
         with:
           name: db-file
           path: week5_project.db  # Store the database file as an artifact to use in the test stage
@@ -47,10 +47,10 @@ jobs:
           python-version: '3.x'
 
       - name: Download database artifact
-        uses: actions/download-artifact@v3  # Updated to v3
+        uses: actions/download-artifact@v3  # Use version 3
         with:
           name: db-file
 
-      - name: Test stage: Run unit tests using the .db file
+      - name: Run unit tests using the .db file
         run: |
           python3 -m unittest test_main.py  # Run the unit tests using the .db file
