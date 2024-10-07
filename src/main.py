@@ -15,9 +15,9 @@ def create_table(conn):
                             age INTEGER);''')
 
 def insert_user(conn, name, age):
-    """Insert a new user."""
+    """Insert a new user into the table."""
     with conn:
-        conn.execute('INSERT INTO users (name, age) VALUES (?, ?)')
+        conn.execute('INSERT INTO users (name, age) VALUES (?, ?)', (name, age))
 
 def fetch_users(conn):
     """Fetch all users."""
